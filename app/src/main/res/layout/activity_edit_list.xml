@@ -52,13 +52,28 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/tvMobile3"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/mobile_number"
-                android:textColor="#C207F6"
-                android:textSize="20sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvMobile3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/mobile_number"
+                    android:textColor="#C207F6"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnCall1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CALL" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/etMobile3"
@@ -67,13 +82,28 @@
                 android:ems="10"
                 android:inputType="phone" />
 
-            <TextView
-                android:id="@+id/tvHome3"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/home_number"
-                android:textColor="#C207F6"
-                android:textSize="20sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvHome3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/home_number"
+                    android:textColor="#C207F6"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnCall2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CALL" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/etHome3"

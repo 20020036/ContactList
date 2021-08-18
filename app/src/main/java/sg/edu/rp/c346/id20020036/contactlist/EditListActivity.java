@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ public class EditListActivity extends AppCompatActivity {
     EditText etName, etMobile, etHome, etEmail, etAddress, etInfo;
     RadioGroup rg;
     RadioButton rgFemale, rgMale;
-    Button btnCancel, btnUpdate, btnDelete;
+    Button btnCancel, btnUpdate, btnDelete, btnCall1, btnCall2;
     CheckBox cbFav;
 
     @Override
@@ -42,6 +43,8 @@ public class EditListActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+        btnCall1 = findViewById(R.id.btnCall1);
+        btnCall2 = findViewById(R.id.btnCall2);
         cbFav = findViewById(R.id.cbFav3);
 
         Intent i = getIntent();
@@ -150,6 +153,26 @@ public class EditListActivity extends AppCompatActivity {
 
                 AlertDialog myDialog = myBuilder.create();
                 myDialog.show();
+            }
+        });
+
+        Integer mobile = Integer.parseInt(etMobile.getText().toString().trim());
+        Integer home = Integer.parseInt(etHome.getText().toString().trim());
+
+
+        btnCall1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+mobile));
+                startActivity(intentCall);
+            }
+        });
+
+        btnCall2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCall2 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+home));
+                startActivity(intentCall2);
             }
         });
     }
