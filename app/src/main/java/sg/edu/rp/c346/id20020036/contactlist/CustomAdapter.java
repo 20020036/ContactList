@@ -1,10 +1,13 @@
 package sg.edu.rp.c346.id20020036.contactlist;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -12,6 +15,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter {
+    Button btnCall, btnCall2;
 
     Context parent_context;
     int layout_id;
@@ -40,6 +44,24 @@ public class CustomAdapter extends ArrayAdapter {
         TextView tvGender = customView.findViewById(R.id.tvGender1);
         TextView tvInfo = customView.findViewById(R.id.tvInfo1);
         TextView tvFav = customView.findViewById(R.id.tvFav1);
+        Button btnCall = customView.findViewById(R.id.btnCall);
+        Button btnCall2 = customView.findViewById(R.id.btnCall2);
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+tvMobile.getText().toString()));
+                parent_context.startActivity(intentCall);
+            }
+        });
+
+        btnCall2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+tvHome.getText().toString()));
+                parent_context.startActivity(intentCall);
+            }
+        });
 
         Contacts currentVersion = versionList.get(position);
 
