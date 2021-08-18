@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Contact List</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="home">Home</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="info">Info</string>
+    <string name="name1">Name</string>
+    <string name="mobile_number">Mobile Number 📞</string>
+    <string name="home_number">Home Number ☎</string>
+    <string name="email1">Email 📧</string>
+    <string name="address1">Address 🏡</string>
+    <string name="gender">Gender 🙎🏻‍♂️🙎🏻♀️</string>
+    <string name="female">Female 👩🏻</string>
+    <string name="male">Male 👨🏻</string>
+    <string name="additional_info">Additional Info 📋</string>
+    <string name="add_to_favourites">Add to Favourites</string>
+    <string name="insert">INSERT 💾</string>
+    <string name="show_list">SHOW LIST 📃</string>
+    <string name="show_favorite_contacts">SHOW FAVORITE CONTACTS</string>
+    <string name="update">UPDATE</string>
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
 </resources>

@@ -22,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ADDRESS = "address";
     private static final String COLUMN_GENDER = "gender";
     private static final String COLUMN_INFO = "info";
+    private static final String COLUMN_FAV = "false";
 
     public DBHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
@@ -36,7 +37,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_EMAIL + " TEXT, "
                 + COLUMN_ADDRESS + " TEXT, "
                 + COLUMN_GENDER + " TEXT, "
-                + COLUMN_INFO + " TEXT )";
+                + COLUMN_INFO + " TEXT, "
+                + COLUMN_FAV + " TEXT )";
+
         db.execSQL(createContactTableSql);
         Log.i("info", createContactTableSql + "\ncreated tables");
     }
@@ -46,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertContact(String name, String mobile, String home, String email, String address, String gender, String info) {
+    public long insertContact(String name, String mobile, String home, String email, String address, String gender, String info, String fav) {
         // Get an instance of the database for writing
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -57,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_ADDRESS, address);
         values.put(COLUMN_GENDER, gender);
         values.put(COLUMN_INFO, info);
+        values.put(COLUMN_FAV, fav);
         // Insert the row into the TABLE_SONG
         long result = db.insert(TABLE_CONTACTS, null, values);
         // Close the database connection
@@ -71,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_NAME + "," + COLUMN_MOBILE + ","
                 + COLUMN_HOME + "," + COLUMN_EMAIL + ","
                 + COLUMN_ADDRESS + "," + COLUMN_GENDER + ","
-                + COLUMN_INFO + " FROM " + TABLE_CONTACTS;
+                + COLUMN_INFO + "," + COLUMN_FAV + " FROM " + TABLE_CONTACTS;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -85,8 +89,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 String address = cursor.getString(5);
                 String gender = cursor.getString(6);
                 String info = cursor.getString(7);
+                String fav = cursor.getString(8);
 
-                Contacts newContact = new Contacts(id, name, mobile, home, email, address, gender, info);
+                Contacts newContact = new Contacts(id, name, mobile, home, email, address, gender, info, fav);
                 booksList.add(newContact);
             } while (cursor.moveToNext());
         }
@@ -95,20 +100,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return booksList;
     }
 
-    /*public ArrayList<Contacts> getAllBooksByStars(int starsFilter) {
-        ArrayList<Contacts> booksList = new ArrayList<Contacts>();
+    public ArrayList<Contacts> getAllContactsByFav(String fav) {
+        ArrayList<Contacts> contactsList = new ArrayList<Contacts>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns= {COLUMN_ID, COLUMN_NAME, COLUMN_MOBILE, COLUMN_HOME, COLUMN_EMAIL, COLUMN_ADDRESS, COLUMN_GENDER, COLUMN_INFO};
-        String condition = COLUMN_STARS + ">= ?";
-        String[] args = {String.valueOf(starsFilter)};
+        String[] columns= {COLUMN_ID, COLUMN_NAME, COLUMN_MOBILE, COLUMN_HOME, COLUMN_EMAIL, COLUMN_ADDRESS, COLUMN_GENDER, COLUMN_INFO, COLUMN_FAV};
+        String condition = COLUMN_FAV + "== ?";
+        String[] args = {String.valueOf(fav)};
 
-        //String selectQuery = "SELECT " + COLUMN_ID + ","
-        //            + COLUMN_TITLE + ","
-        //            + COLUMN_AUTHOR + ","
-        //            + COLUMN_NUM + ","
-        //            + COLUMN_STARS
-        //            + " FROM " + TABLE_SONG;
 
         Cursor cursor;
         cursor = db.query(TABLE_CONTACTS, columns, condition, args, null, null, null, null);
@@ -118,19 +117,22 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String name = cursor.getString(1);
-                String author = cursor.getString(2);
-                int num = cursor.getInt(3);
-                int stars = cursor.getInt(4);
+                String mobile = cursor.getString(2);
+                String home = cursor.getString(3);
+                String email = cursor.getString(4);
+                String address = cursor.getString(5);
+                String gender = cursor.getString(6);
+                String info = cursor.getString(7);
 
-                Books newBook = new Books(id, title, author, num, stars);
-                booksList.add(newBook);
+                Contacts newContact = new Contacts(id, name, mobile, home, email, address, gender, info, fav);
+                contactsList.add(newContact);
             } while (cursor.moveToNext());
         }
         // Close connection
         cursor.close();
         db.close();
-        return booksList;
-    }*/
+        return contactsList;
+    }
 
 
 
@@ -144,6 +146,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_ADDRESS, data.getAddress());
         values.put(COLUMN_GENDER, data.getGender());
         values.put(COLUMN_INFO, data.getInfo());
+        values.put(COLUMN_FAV, data.getInfo());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         int result = db.update(TABLE_CONTACTS, values, condition, args);
@@ -159,58 +162,5 @@ public class DBHelper extends SQLiteOpenHelper {
         int result = db.delete(TABLE_CONTACTS, condition, args);
         db.close();
         return result;
-    }
-
-    public ArrayList<String> getGender() {
-        ArrayList<String> codes = new ArrayList<String>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns= {COLUMN_GENDER};
-
-        Cursor cursor;
-        cursor = db.query(true, TABLE_CONTACTS, columns, null, null, null, null, null, null);
-        // Loop through all rows and add to ArrayList
-        if (cursor.moveToFirst()) {
-            do {
-                codes.add(cursor.getString(0));
-            } while (cursor.moveToNext());
-        }
-        // Close connection
-        cursor.close();
-        db.close();
-        return codes;
-    }
-
-    public ArrayList<Contacts> getAllContactsByGender(int numFilter) {
-        ArrayList<Contacts> contactsList = new ArrayList<Contacts>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns= {COLUMN_ID, COLUMN_NAME, COLUMN_MOBILE, COLUMN_HOME, COLUMN_EMAIL, COLUMN_ADDRESS, COLUMN_GENDER, COLUMN_INFO};
-        String condition = COLUMN_GENDER + "= ?";
-        String[] args = {String.valueOf(numFilter)};
-
-        Cursor cursor;
-        cursor = db.query(TABLE_CONTACTS, columns, condition, args, null, null, null, null);
-
-        // Loop through all rows and add to ArrayList
-        if (cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String mobile = cursor.getString(2);
-                String home = cursor.getString(3);
-                String email = cursor.getString(4);
-                String address = cursor.getString(5);
-                String gender = cursor.getString(6);
-                String info = cursor.getString(7);
-
-                Contacts newContact = new Contacts(id, name, mobile, home, email, address, gender, info);
-                contactsList.add(newContact);
-            } while (cursor.moveToNext());
-        }
-        // Close connection
-        cursor.close();
-        db.close();
-        return contactsList;
     }
 }

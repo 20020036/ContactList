@@ -12,8 +12,9 @@ public class Contacts implements Serializable {
     private String address;
     private String gender;
     private String info;
+    private String fav;
 
-    public Contacts(int id, String name, String mobile, String home, String email, String address, String gender, String info) {
+    public Contacts(int id, String name, String mobile, String home, String email, String address, String gender, String info, String fav) {
         this.id = id;
         this.name = name;
         this.mobile = mobile;
@@ -22,6 +23,7 @@ public class Contacts implements Serializable {
         this.address = address;
         this.gender = gender;
         this.info = info;
+        this.fav = fav;
     }
 
     public int getId() {
@@ -83,4 +85,8 @@ public class Contacts implements Serializable {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    public String getFav() { return fav; }
+
+    public void setFav(String fav) {this.fav = fav; }
 }

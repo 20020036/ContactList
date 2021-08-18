@@ -3,26 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#8CFFE8"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="#8CFFE8"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="#8CFFE8"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textColor="#818181"
+                android:textColor="#3700FF"
+                android:text="@string/name1"
                 android:textSize="18sp" />
 
             <EditText
@@ -36,9 +39,8 @@
                 android:id="@+id/tvMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mobile Number 📞"
-                android:textColor="#7E7E7E"
-                android:textColorHint="#8C8C8C"
+                android:text="@string/mobile_number"
+                android:textColor="#3700FF"
                 android:textSize="18sp" />
 
             <EditText
@@ -52,7 +54,8 @@
                 android:id="@+id/tvHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Home Number ☎"
+                android:textColor="#3700FF"
+                android:text="@string/home_number"
                 android:textSize="18sp" />
 
             <EditText
@@ -66,7 +69,8 @@
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email 📧"
+                android:textColor="#3700FF"
+                android:text="@string/email1"
                 android:textSize="18sp" />
 
             <EditText
@@ -80,7 +84,8 @@
                 android:id="@+id/tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Address 🏡"
+                android:textColor="#3700FF"
+                android:text="@string/address1"
                 android:textSize="18sp" />
 
             <EditText
@@ -94,7 +99,8 @@
                 android:id="@+id/tvGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Gender 🙎🏻‍♂️🙎🏻♀️"
+                android:textColor="#3700FF"
+                android:text="@string/gender"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -103,7 +109,7 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
-                    android:id="@+id/rg"
+                    android:id="@+id/rgGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -112,14 +118,14 @@
                         android:id="@+id/rgFemale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Female 👩🏻"
+                        android:text="@string/female"
                         android:textSize="18sp" />
 
                     <RadioButton
                         android:id="@+id/rgMale"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Male 👨🏻"
+                        android:text="@string/male"
                         android:textSize="18sp" />
 
                 </RadioGroup>
@@ -130,7 +136,8 @@
                 android:id="@+id/tvInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Additional Info 📋"
+                android:textColor="#3700FF"
+                android:text="@string/additional_info"
                 android:textSize="18sp" />
 
             <EditText
@@ -140,23 +147,12 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/tvType"
+            <CheckBox
+                android:id="@+id/cbFav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact Type: Favorite / Normal"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#3700FF"
-                android:text="Add to Favorites"
-                android:textColor="#FFFFFF"
-                android:textOff="Normal Contact"
-                android:textOn="Favorite Contact"
+                android:textColor="#3700FF"
+                android:text="@string/add_to_favourites"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -169,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="INSERT 💾"
+                    android:text="@string/insert"
                     android:textSize="18sp"
                     app:backgroundTint="#3700FF" />
 
@@ -178,9 +174,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="SHOW LIST 📃"
+                    android:text="@string/show_list"
                     android:textSize="18sp"
-                    app:backgroundTint="#FFFFFF" />
+                    app:backgroundTint="#3700FF" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

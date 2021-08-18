@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText etName, etMobile, etHome, etEmail, etAddress, etInfo;
     Button btnInsert, btnShowList;
-    ToggleButton toggleButton;
+    CheckBox cbFav;
     RadioGroup rg;
 
     @Override
@@ -31,12 +31,19 @@ public class MainActivity extends AppCompatActivity {
         etInfo = findViewById(R.id.etInfo);
         btnInsert = findViewById(R.id.btnInsert);
         btnShowList = findViewById(R.id.btnList);
-        toggleButton = findViewById(R.id.toggleButton);
-        rg = findViewById(R.id.rg);
+        cbFav = findViewById(R.id.cbFav);
+        rg = findViewById(R.id.rgGender);
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String fav = "false";
+
+                if(cbFav.isChecked())
+                {
+                    fav = "true";
+                }
+
                 String name = etName.getText().toString().trim();
                 String mobile = etMobile.getText().toString().trim();
                 String home = etHome.getText().toString().trim();
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 String gender = String.valueOf(getGender());
-                dbh.insertContact(name, mobile, home, email, address, gender, info);
+                dbh.insertContact(name, mobile, home, email, address, gender, info, fav);
                 dbh.close();
                 Toast.makeText(MainActivity.this, "Inserted", Toast.LENGTH_LONG).show();
 
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 etEmail.setText("");
                 etAddress.setText("");
                 etInfo.setText("");
+                cbFav.setChecked(false);
             }
         });
 
@@ -74,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     private String getGender()
@@ -82,10 +91,10 @@ public class MainActivity extends AppCompatActivity {
         switch (rg.getCheckedRadioButtonId())
         {
             case R.id.rgFemale:
-                gender = "Female";
+                gender = "🙎🏻‍♀️";
                 break;
             case R.id.rgMale:
-                gender = "Male";
+                gender = "🙎🏻‍♂️";
                 break;
         }
         return gender;
